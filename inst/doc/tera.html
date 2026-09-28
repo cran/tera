@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.10.18">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>tera</title>
+<style>
+
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: 1.5em;}
+div.column{flex: auto;}
+@media screen {
+div.columns{gap: min(4vw, 1.5em);}
+div.column{overflow-x: auto;}
+}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+width: 0.8em;
+margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
+}
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+}
+pre.numberSource { margin-left: 3em; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+</style>
+</head>
+
+<body>
+
+
+<header id="title-block-header">
+<h1 class="title">tera</h1>
+
+</header>
+
+
+<p>This vignette walks through some of the basics of rendering templates with Tera in R. Users mainly interact with a Tera R6 object, which serves as a template library with encapsulated methods for rendering templates with a given context.</p>
+<p>A templating engine requires two things:</p>
+<ul>
+<li>a <code>template</code>, as you may have guessed, that includes variables and rendering logic describing where and how to inject data, and</li>
+<li>a <code>context</code>, or a set of variables and values to be injected into the template.</li>
+</ul>
+<p>Templating syntax is described in the documentation for <a href="https://keats.github.io/tera/">Tera</a>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tera)</span></code></pre></div>
+</div>
+<h2 id="usage">Usage</h2>
+<p>To get a feel for what <code>tera</code> can do, let’s start with a simple “hello world” example.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>tera <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>()</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">render_string</span>(</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;&lt;p&gt;Hello {{ x }}. This is {{ y }}.&lt;/p&gt;&#39;</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="st">&quot;world&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="st">&quot;tera&quot;</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;&lt;p&gt;Hello world. This is tera.&lt;/p&gt;&quot;</code></pre>
+</div>
+</div>
+<p>The syntax and API should look pretty familiar to anyone who has used <code>glue</code> to do something like <code>glue::glue(&quot;Foo { x }&quot;, x = &quot;bar&quot;)</code>. The big difference is the object-oriented workflow.</p>
+<h2 id="initializing-tera">Initializing <code>Tera</code></h2>
+<p>Everything in <code>tera</code> revolves around the <code>Tera</code> object, which serves as a template library with encapsulated rendering methods. In the above example, we initialize a <code>Tera</code> engine with an empty template library by calling <code>Tera$new()</code> with no arguments.</p>
+<p>If you have a complicated directory system with nested templates and inheritance patterns - a common situation for web development, you may find it easier to initialize an <code>tera</code> by specifying the directory with a glob pattern. Suppose, for example, that you have a website directory that looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>template_dir <span class="ot">&lt;-</span> <span class="fu">system.file</span>(<span class="st">&quot;templates&quot;</span>, <span class="at">package =</span> <span class="st">&quot;tera&quot;</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;website&quot;</span>,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list.files</span>(template_dir, <span class="at">recursive =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">- &quot;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>website
+- base.html
+- blog/post.html
+- components.html
+- hello.html
+- index.html</code></pre>
+</div>
+</div>
+<p>You can generate a new <code>Tera</code> around this directory like so</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>tera <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>(<span class="fu">file.path</span>(template_dir, <span class="st">&quot;**/*.html&quot;</span>))</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>tera</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="do">## ── Tera ──</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Template library:</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="do">## • base.html</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="do">## • blog/post.html</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="do">## • components.html</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="do">## • hello.html</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="do">## • index.html</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Globals: 0</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Components: 2</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Autoescape: TRUE</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Delimiters: {% Block %}, {{ Variable }}, {# Comment #}</span></span></code></pre></div>
+</div>
+<h2 id="adding-templates">Adding templates</h2>
+<p>Templates can be added from file or string.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># add templates manually from file</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>tera <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>()</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">add_file_templates</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;base.html&quot;</span> <span class="ot">=</span> <span class="fu">file.path</span>(template_dir, <span class="st">&quot;base.html&quot;</span>),</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;index.html&quot;</span> <span class="ot">=</span> <span class="fu">file.path</span>(template_dir, <span class="st">&quot;index.html&quot;</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>tera</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="do">## ── Tera ──</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Template library:</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a><span class="do">## • base.html</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="do">## • index.html</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Globals: 0</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="do">## Components: 0</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a><span class="do">## Autoescape: TRUE</span></span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Delimiters: {% Block %}, {{ Variable }}, {# Comment #}</span></span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># add templates manually from string</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">add_string_templates</span>(</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  <span class="at">img =</span> <span class="st">&#39;&lt;img src=&quot;{{ img_src }}&quot;&gt;&#39;</span></span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>tera</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="do">## ── Tera ──</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a><span class="do">## Template library:</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="do">## • base.html</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a><span class="do">## • img</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a><span class="do">## • index.html</span></span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a><span class="do">## Globals: 0</span></span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Components: 0</span></span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a><span class="do">## Autoescape: TRUE</span></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a><span class="do">## Delimiters: {% Block %}, {{ Variable }}, {# Comment #}</span></span></code></pre></div>
+</div>
+<p>If you initialize a tera instance with a glob and then add more file templates to the template directory, you can reload with the glob to catch the new templates.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>example_dir <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;tera-templates&quot;</span>)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dir.create</span>(example_dir)</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="fu">file.path</span>(template_dir, <span class="st">&quot;base.html&quot;</span>),</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fu">file.path</span>(example_dir, <span class="st">&quot;base.html&quot;</span>)</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>tera <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>(<span class="fu">file.path</span>(example_dir, <span class="st">&quot;*.html&quot;</span>))</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>tera</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="do">## ── Tera ──</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Template library:</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="do">## • base.html</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="do">## Globals: 0</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="do">## Components: 0</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="do">## Autoescape: TRUE</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="do">## Delimiters: {% Block %}, {{ Variable }}, {# Comment #}</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="fu">file.copy</span>(</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="at">from =</span> <span class="fu">file.path</span>(template_dir, <span class="st">&quot;index.html&quot;</span>),</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="at">to =</span> <span class="fu">file.path</span>(example_dir, <span class="st">&quot;index.html&quot;</span>)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] TRUE</span></span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">reload</span>()</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>tera</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a><span class="do">## ── Tera ──</span></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a><span class="do">## Template library:</span></span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a><span class="do">## • base.html</span></span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a><span class="do">## • index.html</span></span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a><span class="do">## Globals: 0</span></span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a><span class="do">## Components: 0</span></span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a><span class="do">## Autoescape: TRUE</span></span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a><span class="do">## Delimiters: {% Block %}, {{ Variable }}, {# Comment #}</span></span></code></pre></div>
+</div>
+<p>Reset to continue with built-in template examples.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tera <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>(<span class="fu">file.path</span>(template_dir, <span class="st">&quot;**/*.html&quot;</span>))</span></code></pre></div>
+</div>
+<h2 id="rendering-basics">Rendering basics</h2>
+<p>Generally speaking, rendering a template involves supplying it with a <code>context</code>, or a set of key-value pairs, with the keys being the variable names - surrounded by <code>{{ variable }}</code> in the template - and their values being the content to inject into the template. You can render a template to string or to a file. Consider our hypothetical website’s index template:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>template_dir <span class="sc">|&gt;</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">&quot;index.html&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readLines</span>(<span class="at">warn =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{% extends &quot;base.html&quot; %}
+{% block content %}
+&lt;h1&gt;{{ title }}&lt;/h1&gt;
+&lt;p&gt;{{ p }}.&lt;/p&gt;
+{% endblock content %}
+{% block footer %}
+&lt;p&gt;Copyright 2026 by {{ owner }}.&lt;/p&gt;
+{% endblock footer %}</code></pre>
+</div>
+</div>
+<p>This has three variables: <code>{{ title }}</code>, <code>{{ p }}</code>, and <code>{{ owner }}</code>. You can render this template to a string by passing it a context, a set of values for those variables. Here we render the template to a string.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_template</span>(</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;index.html&quot;</span>,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;This is my blog&quot;</span>,</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="st">&quot;Welcome to my awesome homepage.&quot;</span>,</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">owner =</span> <span class="st">&quot;Blake&quot;</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;article&gt;
+      
+&lt;h1&gt;This is my blog&lt;/h1&gt;
+&lt;p&gt;Welcome to my awesome homepage..&lt;/p&gt;
+
+    &lt;/article&gt;
+    &lt;footer&gt;
+      
+&lt;p&gt;Copyright 2026 by Blake.&lt;/p&gt;
+
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<p>You can also render a template to file by specifying <code>outfile</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>outfile <span class="ot">&lt;-</span> <span class="fu">file.path</span>(<span class="fu">tempdir</span>(), <span class="st">&quot;rendered-index.html&quot;</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">render_template</span>(</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;index.html&quot;</span>,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;This is my blog&quot;</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="st">&quot;Welcome to my awesome homepage.&quot;</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">owner =</span> <span class="st">&quot;Blake&quot;</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">outfile =</span> outfile</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">readLines</span>(outfile, <span class="at">warn =</span> <span class="cn">FALSE</span>), <span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;article&gt;
+      
+&lt;h1&gt;This is my blog&lt;/h1&gt;
+&lt;p&gt;Welcome to my awesome homepage..&lt;/p&gt;
+
+    &lt;/article&gt;
+    &lt;footer&gt;
+      
+&lt;p&gt;Copyright 2026 by Blake.&lt;/p&gt;
+
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<p>And you can render a specific block in a template:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_template</span>(</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;index.html&quot;</span>,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;This is my blog&quot;</span>,</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="st">&quot;Welcome to my awesome homepage.&quot;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">owner =</span> <span class="st">&quot;Blake&quot;</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">block =</span> <span class="st">&quot;content&quot;</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+&lt;h1&gt;This is my blog&lt;/h1&gt;
+&lt;p&gt;Welcome to my awesome homepage..&lt;/p&gt;</code></pre>
+</div>
+</div>
+<p>You can also render individual components defined in one of your templates, for example</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_component</span>(</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;widget&quot;</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;foo&quot;</span>,</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">body =</span> <span class="st">&quot;&lt;p&gt;This is a widget!&lt;/p&gt;&quot;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+&lt;div class=&quot;widget&quot;&gt;
+    &lt;h3&gt;foo&lt;/h3&gt;
+    &lt;p&gt;This is a widget!&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+</div>
+</div>
+<p>And you can bypass library templates altogether and pass a template string directly</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_string</span>(</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;&lt;img src=&quot;{{ img_src }}&quot;&gt;&#39;</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">img_src =</span> <span class="st">&quot;foo/bar.svg&quot;</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;img src=&quot;foo/bar.svg&quot;&gt;</code></pre>
+</div>
+</div>
+<p>Two helper functions are also provided if you want to render a one-off template without going throught he process of initializing a tera instance. The <code>render_template()</code> function will render a template file, and <code>render_string()</code> will render a string, same as the methods, but without the explicit tera instance.</p>
+<h2 id="inspecting-the-library">Inspecting the library</h2>
+<p>There are some tools for inspecting the library. You can get a list of templates and components in the library and a list of variables in a specific template.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">templates</span>()</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;base.html&quot;       &quot;blog/post.html&quot;  &quot;components.html&quot; &quot;hello.html&quot;     </span></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a><span class="do">## [5] &quot;index.html&quot;</span></span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">components</span>()</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;button&quot; &quot;widget&quot;</span></span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">variables</span>(<span class="st">&quot;index.html&quot;</span>)</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="do">## [1] &quot;owner&quot; &quot;p&quot;     &quot;title&quot;</span></span></code></pre></div>
+</div>
+<p>There is also the print method, which provides some of this information.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">print</span>()</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a><span class="do">## ── Tera ──</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="do">## Template library:</span></span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a><span class="do">## • base.html</span></span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="do">## • blog/post.html</span></span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a><span class="do">## • components.html</span></span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a><span class="do">## • hello.html</span></span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="do">## • index.html</span></span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a><span class="do">## Globals: 0</span></span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a><span class="do">## Components: 2</span></span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="do">## Autoescape: TRUE</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Delimiters: {% Block %}, {{ Variable }}, {# Comment #}</span></span></code></pre></div>
+</div>
+<h2 id="rendering-logic">Rendering logic</h2>
+<p>The <code>Tera</code> templating engine offers a lot of additional functionality, like control flow and data manipulation. For example, the blog post template shows how to construct a for loop and apply built-in filters and functions.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>template_dir <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">&quot;blog&quot;</span>, <span class="st">&quot;post.html&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readLines</span>(<span class="at">warn =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{% extends &quot;base.html&quot; %}
+{% block content -%}
+&lt;h1&gt;{{ title }}&lt;/h1&gt;
+&lt;p&gt;Last updated: {{ now() | date(format=&quot;%Y-%m-%d&quot;) }}.&lt;/p&gt;
+&lt;ul&gt;
+    {%- for product in products %}
+    &lt;li&gt;{{ product.name }}: {{ product.price }}&lt;/li&gt;
+    {%- endfor %}
+&lt;/ul&gt;
+{%- endblock content %}</code></pre>
+</div>
+</div>
+<p>In <code>{{ now() | date(format=&quot;%Y-%m-%d&quot;) }}</code>, <code>now()</code> is a function that returns the current date and time. It’s returned value is then piped to the <code>date()</code> filter, which provides formatting options. The template also has the for-loop construction <code>{$ for product in products %}</code> that allows for looping over the elements of a product table or array. When passed a data.frame, we get this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>products <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">name =</span> <span class="fu">c</span>(<span class="st">&quot;apple&quot;</span>, <span class="st">&quot;banana&quot;</span>, <span class="st">&quot;orange&quot;</span>),</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">price =</span> <span class="fu">c</span>(<span class="fl">0.25</span>, <span class="fl">0.4</span>, <span class="fl">0.5</span>)</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_template</span>(</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;blog/post.html&quot;</span>,</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;Fruit prices&quot;</span>,</span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">products =</span> products</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;article&gt;
+      &lt;h1&gt;Fruit prices&lt;/h1&gt;
+&lt;p&gt;Last updated: 2026-09-14.&lt;/p&gt;
+&lt;ul&gt;
+    &lt;li&gt;apple: 0.25&lt;/li&gt;
+    &lt;li&gt;banana: 0.4&lt;/li&gt;
+    &lt;li&gt;orange: 0.5&lt;/li&gt;
+&lt;/ul&gt;
+    &lt;/article&gt;
+    &lt;footer&gt;
+      
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<h2 id="autoescape">Autoescape</h2>
+<p>Tera escapes HTML by default:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_string</span>(</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;{{ html }}&quot;</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">html =</span> <span class="st">&quot;&lt;script&gt;alert(&#39;Hello World!&#39;)&lt;/script&gt;&quot;</span></span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&amp;lt;script&amp;gt;alert(&amp;#39;Hello World!&amp;#39;)&amp;lt;/script&amp;gt;</code></pre>
+</div>
+</div>
+<p>For one-off rendering like the above, the function takes an autoescape argument.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_string</span>(</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;{{ html }}&quot;</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">html =</span> <span class="st">&quot;&lt;script&gt;alert(&#39;Hello World!&#39;)&lt;/script&gt;&quot;</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">autoescape =</span> <span class="cn">FALSE</span></span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;script&gt;alert(&#39;Hello World!&#39;)&lt;/script&gt;</code></pre>
+</div>
+</div>
+<p>For rendering templates and components in the library, you can turn off autoescape globally using <code>$autoescape_off()</code> and turn it back on with <code>$autoescape_on()</code> (it is on by default).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">autoescape_off</span>()</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>tera<span class="sc">$</span><span class="fu">autoescape_on</span>()</span></code></pre></div>
+</div>
+<h2 id="delimiters">Delimiters</h2>
+<p>Templates are marked up with <code>{% blocks %}</code>, <code>{{ variables }}</code>, and <code>{# comments #}</code>. You can change these with <code>$set_delimiters()</code>, though only on an engine with an empty template library, so it must be done before any templates are added.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>alt <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>()</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>alt<span class="sc">$</span><span class="fu">set_delimiters</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable_start =</span> <span class="st">&quot;&lt;&lt;&quot;</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">variable_end =</span> <span class="st">&quot;&gt;&gt;&quot;</span></span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>alt<span class="sc">$</span><span class="fu">render_string</span>(<span class="st">&quot;&lt;&lt; greeting &gt;&gt;, world!&quot;</span>, <span class="at">greeting =</span> <span class="st">&quot;Hello&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] &quot;Hello, world!&quot;</code></pre>
+</div>
+</div>
+<p>Each start delimiter must differ from the others, each delimiter must be exactly two bytes long, and any delimiter left <code>NULL</code> is unchanged. Use <code>$delimiters()</code> to see the current set.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>alt<span class="sc">$</span><span class="fu">delimiters</span>()</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>$block_start
+[1] &quot;{%&quot;
+
+$block_end
+[1] &quot;%}&quot;
+
+$variable_start
+[1] &quot;&lt;&lt;&quot;
+
+$variable_end
+[1] &quot;&gt;&gt;&quot;
+
+$comment_start
+[1] &quot;{#&quot;
+
+$comment_end
+[1] &quot;#}&quot;</code></pre>
+</div>
+</div>
+<h2 id="inheritance">Inheritance</h2>
+<p>Templates can inherit content from each other in one of two ways, either using <code>include</code> or, for more complicated inheritance, <code>extends</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_string</span>(</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">&#39;{%- include &quot;index.html&quot; -%}&#39;</span>,</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;This is my blog&quot;</span>,</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="st">&quot;Welcome to my awesome homepage.&quot;</span>,</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">owner =</span> <span class="st">&quot;Blake&quot;</span></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+
+&lt;h1&gt;This is my blog&lt;/h1&gt;
+&lt;p&gt;Welcome to my awesome homepage..&lt;/p&gt;
+
+
+&lt;p&gt;Copyright 2026 by Blake.&lt;/p&gt;</code></pre>
+</div>
+</div>
+<p>The extension mechanism is a little more involved, requiring that you specify content blocks where content from a child document should be injected. We have actually been using this method in the examples already. Our current library has <code>base.html</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>template_dir <span class="sc">|&gt;</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">&quot;base.html&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readLines</span>(<span class="at">warn =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;article&gt;
+      {% block content %}{% endblock content %}
+    &lt;/article&gt;
+    &lt;footer&gt;
+      {% block footer %}{% endblock footer %}
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+<p>Notice it has two <code>{% block ... %}</code>. This is where a child document inserts content. And here is <code>index.html</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>template_dir <span class="sc">|&gt;</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">file.path</span>(<span class="st">&quot;index.html&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">readLines</span>(<span class="at">warn =</span> <span class="cn">FALSE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="at">sep =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{% extends &quot;base.html&quot; %}
+{% block content %}
+&lt;h1&gt;{{ title }}&lt;/h1&gt;
+&lt;p&gt;{{ p }}.&lt;/p&gt;
+{% endblock content %}
+{% block footer %}
+&lt;p&gt;Copyright 2026 by {{ owner }}.&lt;/p&gt;
+{% endblock footer %}</code></pre>
+</div>
+</div>
+<p>Notice it has <code>{% extends &quot;base.html&quot; %}</code>. This makes it a child document of <code>base.html</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>tera <span class="ot">&lt;-</span> Tera<span class="sc">$</span><span class="fu">new</span>(<span class="fu">file.path</span>(template_dir, <span class="st">&quot;**/*.html&quot;</span>))</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>string <span class="ot">&lt;-</span> tera<span class="sc">$</span><span class="fu">render_template</span>(</span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;index.html&quot;</span>,</span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">title =</span> <span class="st">&quot;This is my blog&quot;</span>,</span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">p =</span> <span class="st">&quot;Welcome to my awesome homepage.&quot;</span>,</span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">owner =</span> <span class="st">&quot;Blake&quot;</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(string)</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+  &lt;head&gt;&lt;/head&gt;
+  &lt;body&gt;
+    &lt;article&gt;
+      
+&lt;h1&gt;This is my blog&lt;/h1&gt;
+&lt;p&gt;Welcome to my awesome homepage..&lt;/p&gt;
+
+    &lt;/article&gt;
+    &lt;footer&gt;
+      
+&lt;p&gt;Copyright 2026 by Blake.&lt;/p&gt;
+
+    &lt;/footer&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+</div>
+</div>
+
+
+
+
+
+</body></html>

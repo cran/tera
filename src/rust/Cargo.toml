@@ -1,0 +1,42 @@
+[package]
+name = "rtera"
+version = "0.1.0"
+edition = "2021"
+rust-version = "1.65"
+publish = false
+
+[lib]
+crate-type = ["staticlib"]
+name = "rtera"
+
+[dependencies."extendr-api"]
+git = "https://github.com/extendr/extendr"
+features = ["serde"]
+
+[dependencies."serde_json"]
+version = "1.0.143"
+
+[dependencies."tera"]
+version = "2"
+features = [
+  "fast",
+  "glob_fs",
+  "preserve_order",
+]
+
+[dependencies."tera-contrib"]
+version = "0.3"
+features = [
+  "base64",
+  "date",
+  "filesize_format",
+  "format",
+  "json",
+  "rand",
+  "regex",
+  "slug",
+  "urlencode",
+]
+
+[profile.release]
+lto = true
